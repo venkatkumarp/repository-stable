@@ -1,0 +1,23 @@
+# Stable Reusable Workflow (.github/workflows/stable-reusable.yml)
+name: Stable Reusable Workflow
+on:
+  workflow_call: # Allows this workflow to be called from other workflows or repositories
+    inputs:
+      message:
+        required: true
+        type: string
+
+jobs:
+  print_message_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print the provided message
+        run: echo "Message: ${{ inputs.message }}"
+
+      - name: Print GitHub repository and branch information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
